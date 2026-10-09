@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#331435">
+
+  <title>Un universo para ti</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E💗%3C/text%3E%3C/svg%3E"
+  >
+</head>
+
+<body>
+  <section id="login" class="login">
+    <form id="loginForm" class="login-card">
+      <p class="eyebrow">MÉXICO ♡ NICARAGUA</p>
+      <div class="big-icon">💌</div>
+
+      <h1>Un universo<br>solo para ti.</h1>
+
+      <p>Alguien que te quiere mucho preparó esta sorpresa.</p>
+
+      <label>
+        Usuario
+        <input id="user" autocomplete="username" required>
+      </label>
+
+      <label>
+        Contraseña
+        <input
+          id="password"
+          type="password"
+          autocomplete="current-password"
+          required
+        >
+      </label>
+
+      <button type="submit">Entrar a mi sorpresa ♡</button>
+      <p id="loginError" role="alert"></p>
+    </form>
+  </section>
+
+  <div id="app" hidden>
+    <header>
+      <a class="brand" href="#inicio">para ti <span>♡</span></a>
+
+      <div class="header-actions">
+        <button id="musicToggle" class="small secondary">
+          ♫ Música
+        </button>
+
+        <button id="logout" class="small secondary">
+          Salir
+        </button>
+      </div>
+    </header>
+
+    <nav aria-label="Apartados">
+      <button data-view="inicio" class="active">Mi regalo</button>
+      <button data-view="musica">Nuestra música</button>
+      <button data-view="pastel">Tu pastel</button>
+      <button data-view="peach">Peach</button>
+      <button data-view="vuelo">Nuestro vuelo</button>
+    </nav>
+
+    <main>
+      <section id="inicio" class="view">
+        <div class="hero">
+          <p class="eyebrow">
+            HECHO CON AMOR · PARA TU CUMPLEAÑOS
+          </p>
+
+          <h1>El mundo es más bonito<br>desde que estás tú.</h1>
+
+          <p id="greeting"></p>
+          <p id="countdown" class="badge" hidden></p>
+
+          <button data-view="pastel">Pide un deseo ✨</button>
+
+          <div class="hero-heart" aria-hidden="true">💝</div>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <p class="eyebrow">UNA CARTA PARA TI</p>
+            <h2>Con todo mi corazón</h2>
+
+            <p id="letter" class="letter"></p>
+            <p id="signature"></p>
+          </article>
+
+          <article class="card">
+            <p class="eyebrow">UN ABRAZO EN PALABRAS</p>
+            <h2>Cuando me extrañes…</h2>
+
+            <p id="loveMessage" class="quote" aria-live="polite">
+              Aquí siempre hay un poquito de mí para ti.
+            </p>
+
+            <button id="newMessage" class="secondary">
+              Abrir otro mensajito 💌
+            </button>
+
+            <div id="memories" class="memories"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="musica" class="view" hidden>
+        <div class="music-banner">
+          <p class="eyebrow">NUESTRA BANDA SONORA</p>
+
+          <h1>Canciones que cuentan<br>nuestra historia.</h1>
+
+          <p>
+            Ariana, Bruno y canciones para nuestro viaje juntos.
+          </p>
+        </div>
+
+        <div id="albums" class="albums"></div>
+      </section>
+
+      <section id="pastel" class="view" hidden>
+        <div class="card center">
+          <p class="eyebrow">HOY CELEBRAMOS TU VIDA</p>
+
+          <h1>
+            Feliz cumpleaños,
+            <span class="her-name"></span>
+          </h1>
+
+          <p>
+            Toca cada vela para apagarla.
+            Guarda un deseo en tu corazón.
+          </p>
+
+          <div class="cake-scene">
+            <div id="candles" class="candles"></div>
+            <div class="cake">🎂</div>
+          </div>
+
+          <div class="controls">
+            <button id="blow">Apagar todas las velas</button>
+
+            <button id="resetCake" class="secondary">
+              Encender otra vez
+            </button>
+          </div>
+
+          <p id="wish" class="quote" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section id="peach" class="view" hidden>
+        <div class="card">
+          <p class="eyebrow">UNA AVENTURA PARA MI PRINCESA</p>
+          <h1>Peach: Reino de corazones</h1>
+
+          <p>
+            Lleva a Peach al castillo.
+            Muévete con ← → o A/D.
+            Salta con espacio, ↑ o W.
+            En celular, usa los botones.
+          </p>
+
+          <div class="game-meta">
+            <span id="score"></span>
+            <span id="best"></span>
+          </div>
+
+          <canvas
+            id="game"
+            width="900"
+            height="320"
+            tabindex="0"
+            aria-label="Juego de Peach: flechas para moverse y espacio para saltar"
+          ></canvas>
+
+          <div class="controls">
+            <button id="startGame">Comenzar aventura</button>
+
+            <button id="restartGame" class="secondary">
+              Reiniciar
+            </button>
+
+            <button
+              id="moveLeft"
+              class="secondary"
+              aria-label="Mover a la izquierda"
+            >
+              ◀
+            </button>
+
+            <button
+              id="moveRight"
+              class="secondary"
+              aria-label="Mover a la derecha"
+            >
+              ▶
+            </button>
+
+            <button id="jump" class="secondary">
+              Saltar 👑
+            </button>
+          </div>
+
+          <p id="gameStatus" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section id="vuelo" class="view" hidden>
+        <div class="card center">
+          <p class="eyebrow">
+            LA DISTANCIA ES SOLO UNA PARTE DE LA HISTORIA
+          </p>
+
+          <h1>Un vuelo hacia ti.</h1>
+
+          <p>
+            De México a Nicaragua, llevando todo lo que siento.
+          </p>
+
+          <div class="flight-scene">
+            <div id="flightStars" class="flight-stars"></div>
+
+            <div class="flight-ticket">
+              VUELO AMOR · MEX → NIC
+            </div>
+
+            <div class="city mexico">
+              🇲🇽
+              <strong>México</strong>
+            </div>
+
+            <div class="route"></div>
+
+            <div id="plane" aria-hidden="true">✈️</div>
+            <div id="flightHearts" aria-hidden="true"></div>
+
+            <div class="city nicaragua">
+              🇳🇮
+              <strong>Nicaragua</strong>
+            </div>
+
+            <div class="cloud one">☁️</div>
+            <div class="cloud two">☁️</div>
+          </div>
+
+          <p class="flight-dedication">
+            Un día este viaje terminará con un abrazo de verdad.
+          </p>
+
+          <progress
+            id="flightProgress"
+            max="100"
+            value="0"
+            aria-label="Progreso del vuelo"
+          ></progress>
+
+          <p id="flightMessage" class="quote" aria-live="polite">
+            Mi destino favorito eres tú.
+          </p>
+
+          <div class="controls">
+            <button id="takeoff">Despegar 💗</button>
+            <button id="openProposal" hidden>Ábreme 💍</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>Entre dos países, un mismo corazón. ♡</footer>
+
+    <div class="player">
+      <span id="trackTitle">Nuestra banda sonora</span>
+
+      <audio id="audio" controls preload="none"></audio>
+
+      <button id="openLyrics" class="small secondary">
+        ♫ Letras
+      </button>
+
+      <p id="audioNotice" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <dialog id="albumDialog">
+    <button
+      class="close"
+      data-close="albumDialog"
+      aria-label="Cerrar álbum"
+    >
+      ×
+    </button>
+
+    <h2 id="albumTitle"></h2>
+    <div id="songs"></div>
+  </dialog>
+
+  <dialog id="lyricsPlayer">
+    <div class="lp-top">
+      <span>NUESTRA BANDA SONORA ♡</span>
+
+      <button
+        id="lpClose"
+        type="button"
+        aria-label="Cerrar letras"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="lp-layout">
+      <div class="lp-info">
+        <div class="lp-art">
+          <img id="lpCover" alt="" hidden>
+          <span id="lpFallback">♫</span>
+        </div>
+
+        <h2 id="lpTitle">Nuestra música</h2>
+        <p id="lpArtist"></p>
+
+        <label class="lp-label" for="lpSeek">
+          Posición de la canción
+        </label>
+
+        <input
+          id="lpSeek"
+          type="range"
+          min="0"
+          max="1"
+          step="0.1"
+          value="0"
+        >
+
+        <div class="lp-times">
+          <span id="lpTime">0:00</span>
+          <span id="lpDuration">0:00</span>
+        </div>
+
+        <button id="lpPlay">▶ Reproducir</button>
+
+        <button id="backToBackground" class="secondary">
+          Volver a Moonlight ♡
+        </button>
+
+        <label class="lp-volume">
+          Volumen
+
+          <input
+            id="lpVolume"
+            type="range"
+            min="0"
+            max="1"
+            step="0.05"
+            value="1"
+          >
+        </label>
+
+        <p id="lpStatus" role="status"></p>
+      </div>
+
+      <div class="lp-text">
+        <p id="lpMode"></p>
+
+        <div
+          id="lpLines"
+          tabindex="0"
+          aria-label="Letra de la canción"
+        ></div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="proposal">
+    <button
+      class="close"
+      data-close="proposal"
+      aria-label="Cerrar propuesta"
+    >
+      ×
+    </button>
+
+    <div class="big-icon">💍</div>
+    <p class="eyebrow">MI SUEÑO MÁS BONITO</p>
+
+    <h1>¿Te quieres<br>casar conmigo?</h1>
+
+    <p>
+      Quiero caminar contigo, cuidar nuestro amor
+      y construir una vida a tu lado.
+    </p>
+
+    <div class="controls">
+      <button id="yes">Sí, contigo ♡</button>
+
+      <button id="later" class="secondary">
+        Quiero que lo hablemos 💌
+      </button>
+    </div>
+
+    <p id="answer" class="quote" aria-live="polite"></p>
+
+    <button id="downloadAnswer" hidden>
+      Guardar mi respuesta
+    </button>
+  </dialog>
+
+  <div id="confetti" aria-hidden="true"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
